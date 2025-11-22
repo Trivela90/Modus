@@ -50,6 +50,7 @@ if user_text:
             if st.session_state.end_flag:
                 assistant_text = "Ótimo! Todas as informações necessárias foram coletadas com sucesso. O gasto foi registrado."
                 expense = response.get("expense_record")
+                st.session_state["user_data"].append(expense.dict())
                 # normalize to dict whether it's a pydantic model or a plain dict
                 if hasattr(expense, "dict"):
                     rec = expense.dict()
