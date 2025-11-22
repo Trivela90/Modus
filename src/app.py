@@ -6,6 +6,7 @@ from pages.navigation import  get_nav_menu
 load_dotenv()
 
 def app():
+    st.logo("src/static/modus.png")
     if 'logged_in' not in st.session_state:
         st.session_state['logged_in'] = None
     get_nav_menu().run_menu()

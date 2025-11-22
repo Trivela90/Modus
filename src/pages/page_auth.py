@@ -7,7 +7,7 @@ st.markdown("<h2 style='text-align:center;'>Modus</h2>", unsafe_allow_html=True)
 with st.container():
     _, container_center, _ = st.columns([0.34,0.46,0.2])
     with container_center: 
-        st.image("static/modus.png", width=200)
+        st.image("src/static/modus.png", width=200)
 
 # Center the box
 _, center, _ = st.columns([0.1, 0.9, 0.1])
@@ -24,7 +24,7 @@ with center:
             # 🔑 Dummy check – replace with real auth
             if username == "admin" and password == "1234":
                 st.session_state.logged_in = True
-                st.success("Logged in successfully!")
+                st.rerun()
             else:
                 st.error("Invalid username or password.")
 
