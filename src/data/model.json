@@ -1,0 +1,42 @@
+[
+  {
+    "description": "Almoço no Restaurante Bom Sabor",
+    "category": "food",
+    "amount": 42.5,
+    "payment_method": "credit_card",
+    "vendor": "Restaurante Bom Sabor",
+    "notes": "Almoço durante o expediente"
+  },
+  {
+    "description": "Corrida de Uber para casa",
+    "category": "transport",
+    "amount": 18.9,
+    "payment_method": "credit_card",
+    "vendor": "Uber",
+    "notes": "Volta do trabalho para casa"
+  },
+  {
+    "description": "Mensalidade academia",
+    "category": "health",
+    "amount": 120.0,
+    "payment_method": "debit_card",
+    "vendor": "Academia FitZone",
+    "notes": "Plano mensal"
+  },
+  {
+    "description": "Livro de programação em Python",
+    "category": "education",
+    "amount": 89.9,
+    "payment_method": "pix",
+    "vendor": "Amazon",
+    "notes": "Livro para estudos"
+  },
+  {
+    "description": "Conta de energia elétrica",
+    "category": "housing",
+    "amount": 153.27,
+    "payment_method": "boleto",
+    "vendor": "Concessionária de Energia XYZ",
+    "notes": "Conta residencial"
+  }
+]
