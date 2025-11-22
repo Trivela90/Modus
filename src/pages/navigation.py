@@ -29,14 +29,13 @@ class Nav_Menu:
         return pages
 
     def run_menu(self):
-        if not st.session_state['logged_in']:
-            menu_pages = {"Auth": [st.Page("pages/page_auth.py", title="Logout", icon=":material/logout:", default=True)]}
-            pg = st.navigation(menu_pages, position="sidebar",expanded=False)
-        else:
-            pg = st.navigation(self.pages, position="sidebar")
-            if st.sidebar.button("Logout", icon=":material/logout:"):
-                st.session_state["logged_in"] = False
-                st.rerun()
+        #if st.sidebar.button("Logout", icon=":material/logout:"):
+        #    st.session_state['usuario'] = None
+        #    st.session_state['usuario_logado'] = False
+        #    st.rerun()
+
+        # ✅ use the grouped pages (with "Modus"), not raw menu_options
+        pg = st.navigation(self.pages, position="sidebar")
         pg.run()
 
 def get_nav_menu():
