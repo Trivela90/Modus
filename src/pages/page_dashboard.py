@@ -2,7 +2,12 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 from datetime import date
+import json
 
+from static.translate import translator
+
+raw_data = st.session_state.get("user_data", [])
+expenses = pd.DataFrame(raw_data)
 # ---------- PAGE CONFIG ----------
 st.set_page_config(
     page_title="Finance Tracker",
@@ -95,17 +100,17 @@ st.markdown(
 )
 
 # ---------- MOCK DATA ----------
-expenses = pd.DataFrame(
-    [
-        ["Groceries", 150.00, "Banco Inter", date(2025, 3, 11)],
-        ["Utilities", 86.00, "Banco Inter", date(2025, 3, 10)],
-        ["Taxi / Transport", 58.00, "Banco do Brasil", date(2025, 3, 9)],
-        ["Eating Out", 125.00, "Nubank", date(2025, 3, 8)],
-        ["Subscriptions", 39.90, "Nubank", date(2025, 3, 7)],
-        ["Health", 97.50, "Banco Inter", date(2025, 3, 7)],
-    ],
-    columns=["Category", "Amount (R$)", "Account", "Date"],
-)
+#expenses = pd.DataFrame(
+#    [
+#        ["Groceries", 150.00, "Banco Inter", date(2025, 3, 11)],
+#        ["Utilities", 86.00, "Banco Inter", date(2025, 3, 10)],
+#        ["Taxi / Transport", 58.00, "Banco do Brasil", date(2025, 3, 9)],
+#        ["Eating Out", 125.00, "Nubank", date(2025, 3, 8)],
+#        ["Subscriptions", 39.90, "Nubank", date(2025, 3, 7)],
+#        ["Health", 97.50, "Banco Inter", date(2025, 3, 7)],
+#    ],
+#    columns=["Category", "Amount (R$)", "Account", "Date"],
+#)
 
 incomes = pd.DataFrame(
     [
@@ -181,18 +186,21 @@ with left_col:
         # st.markdown("</div>", unsafe_allow_html=True)
 
 # ========== CENTER COLUMN (TABLES) ==========
+if "category" in expenses.columns:
+    expenses["category"] = expenses["category"].map(
+        lambda x: translator.get(x, x) if isinstance(x, str) else x
+    )
+expenses = expenses.rename(columns=lambda c: translator.get(c, c))
+
 with center_col:
-    # Expenses
     st.markdown("<div class='section-title'>Expenses</div>", unsafe_allow_html=True)
     with st.container():
-        # st.markdown("<div class='panel'>", unsafe_allow_html=True)
         st.markdown("<div class='panel-header'>Recent Expenses</div>", unsafe_allow_html=True)
         st.dataframe(
-            expenses.sort_values("Date", ascending=False),
+            expenses,           # aqui usamos direto o JSON da session
             hide_index=True,
             use_container_width=True,
         )
-        # st.markdown("</div>", unsafe_allow_html=True)
 
     st.write("")
     # Incomes
