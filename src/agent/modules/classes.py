@@ -30,3 +30,5 @@ class Graph(TypedDict):
     image_path: str
     extracted_text: Optional[str]
     expense_record: Optional[ExpenseRecord]
+    end_flag: bool = False
+    missing_fields: Optional[list[str]] = None
