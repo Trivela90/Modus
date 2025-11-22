@@ -10,13 +10,13 @@ class Nav_Menu:
         menu_options = {}
         # Análise
         menu_options['chat'] = st.Page(
-            "src/pages/page_chatbot.py",
+            "pages/page_chatbot.py",
             title="Chatbot",
             icon=":material/chat:",
             default=True
         )
         menu_options['dashboard'] = st.Page(
-            "src/pages/page_dashboard.py",
+            "pages/page_dashboard.py",
             title="Dashboard",
             icon=":material/bar_chart_4_bars:"
         )
