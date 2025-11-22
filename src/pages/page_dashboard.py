@@ -142,50 +142,52 @@ budgets = [
 ]
 
 # ---------- LAYOUT ----------
-left_col, center_col, right_col = st.columns([1.0, 2.3, 1.1])
+left_col, center_col, right_col = st.columns([0.1, 2.3, 0.1])
 
-# ========== LEFT SIDEBAR (FAKE) ==========
-with left_col:
-    st.markdown("<div class='section-title'>Finance Tracker</div>", unsafe_allow_html=True)
-
-    #     st.markdown("<div class='panel'>", unsafe_allow_html=True)
-    #     st.markdown("<div class='panel-header'>Quick actions</div>", unsafe_allow_html=True)
-
-    #     quick_labels = [
-    #         "➕ New Income",
-    #         "➖ New Expense",
-    #         "🔁 New Transfer",
-    #         "🏦 New Account",
-    #         "🏷️ New Category",
-    #     ]
-    #     for label in quick_labels:
-    #         cols = st.columns([1])
-    #         with cols[0]:
-    #             with st.container():
-    #                 st.markdown("<div class='quick-btn'>", unsafe_allow_html=True)
-    #                 st.button(label, use_container_width=True)
-    #                 st.markdown("</div>", unsafe_allow_html=True)
-
-    #     st.markdown("</div>", unsafe_allow_html=True)
-
-    st.write("")
-    with st.container():
-        # st.markdown("<div class='panel'>", unsafe_allow_html=True)
-        st.markdown("<div class='panel-header'>Budgets</div>", unsafe_allow_html=True)
-
-        for b in budgets:
-            progress = min(b["spent"] / b["limit"], 1.0)
-            st.markdown(
-                f"<div class='budget-name'>{b['name']}</div>"
-                f"<div class='budget-amount'>R${b['spent']:.2f} / R${b['limit']:.2f}</div>",
-                unsafe_allow_html=True,
-            )
-            st.progress(progress)
-            st.write("")
-
+## ========== LEFT SIDEBAR (FAKE) ==========
+#with left_col:
+#    st.markdown("<div class='section-title'>Finance Tracker</div>", unsafe_allow_html=True)
+#
+#    #     st.markdown("<div class='panel'>", unsafe_allow_html=True)
+#    #     st.markdown("<div class='panel-header'>Quick actions</div>", unsafe_allow_html=True)
+#
+#    #     quick_labels = [
+#    #         "➕ New Income",
+#    #         "➖ New Expense",
+#    #         "🔁 New Transfer",
+#    #         "🏦 New Account",
+#    #         "🏷️ New Category",
+#    #     ]
+#    #     for label in quick_labels:
+#    #         cols = st.columns([1])
+#    #         with cols[0]:
+#    #             with st.container():
+#    #                 st.markdown("<div class='quick-btn'>", unsafe_allow_html=True)
+#    #                 st.button(label, use_container_width=True)
+#    #                 st.markdown("</div>", unsafe_allow_html=True)
+#
+#    #     st.markdown("</div>", unsafe_allow_html=True)
+#
+#    st.write("")
+#    with st.container():
+#        # st.markdown("<div class='panel'>", unsafe_allow_html=True)
+#        st.markdown("<div class='panel-header'>Budgets</div>", unsafe_allow_html=True)
+#
+#        for b in budgets:
+#            progress = min(b["spent"] / b["limit"], 1.0)
+#            st.markdown(
+#                f"<div class='budget-name'>{b['name']}</div>"
+#                f"<div class='budget-amount'>R${b['spent']:.2f} / R${b['limit']:.2f}</div>",
+#                unsafe_allow_html=True,
+#            )
+#            st.progress(progress)
+#            st.write("")
+#
         # st.markdown("</div>", unsafe_allow_html=True)
 
 # ========== CENTER COLUMN (TABLES) ==========
+#st.write(expenses.columns.tolist())
+
 if "category" in expenses.columns:
     expenses["category"] = expenses["category"].map(
         lambda x: translator.get(x, x) if isinstance(x, str) else x
@@ -204,71 +206,72 @@ with center_col:
 
     st.write("")
     # Incomes
-    st.markdown("<div class='section-title'>Incomes</div>", unsafe_allow_html=True)
-    with st.container():
-        # st.markdown("<div class='panel'>", unsafe_allow_html=True)
-        st.markdown("<div class='panel-header'>Recent Incomes</div>", unsafe_allow_html=True)
-        st.dataframe(
-            incomes.sort_values("Date", ascending=False),
-            hide_index=True,
-            use_container_width=True,
-        )
+#    st.markdown("<div class='section-title'>Incomes</div>", unsafe_allow_html=True)
+#    with st.container():
+#        # st.markdown("<div class='panel'>", unsafe_allow_html=True)
+#        st.markdown("<div class='panel-header'>Recent Incomes</div>", unsafe_allow_html=True)
+#        st.dataframe(
+#            incomes.sort_values("Date", ascending=False),
+#            hide_index=True,
+#            use_container_width=True,
+#        )
         # st.markdown("</div>", unsafe_allow_html=True)
 
-    st.write("")
-    # Account Transfers
-    st.markdown("<div class='section-title'>Account Transfers</div>", unsafe_allow_html=True)
-    with st.container():
-        # st.markdown("<div class='panel'>", unsafe_allow_html=True)
-        st.markdown("<div class='panel-header'>Recent Transfers</div>", unsafe_allow_html=True)
-        st.dataframe(
-            transfers.sort_values("Date", ascending=False),
-            hide_index=True,
-            use_container_width=True,
-        )
-        # st.markdown("</div>", unsafe_allow_html=True)
+#    st.write("")
+#    # Account Transfers
+#    st.markdown("<div class='section-title'>Account Transfers</div>", unsafe_allow_html=True)
+#    with st.container():
+#        # st.markdown("<div class='panel'>", unsafe_allow_html=True)
+#        st.markdown("<div class='panel-header'>Recent Transfers</div>", unsafe_allow_html=True)
+#        st.dataframe(
+#            transfers.sort_values("Date", ascending=False),
+#            hide_index=True,
+#            use_container_width=True,
+#        )
+#        # st.markdown("</div>", unsafe_allow_html=True)
 
 # ========== RIGHT COLUMN (CHART + ACCOUNTS) ==========
-with right_col:
-    # Expense chart
-    with st.container():
-        # st.markdown("<div class='panel'>", unsafe_allow_html=True)
-        st.markdown("<div class='panel-header'>Expense chart</div>", unsafe_allow_html=True)
-
-        by_cat = expenses.groupby("Category", as_index=False)["Amount (R$)"].sum()
-
-        if not by_cat.empty:
-            chart = (
-                alt.Chart(by_cat)
-                .mark_arc(innerRadius=60)
-                .encode(
-                    theta=alt.Theta("Amount (R$):Q", stack=True),
-                    color=alt.Color("Category:N", legend=None),
-                    tooltip=["Category", "Amount (R$)"],
-                )
-            )
-            st.altair_chart(chart, use_container_width=True)
-        else:
-            st.write("No data")
-
-        # st.markdown("</div>", unsafe_allow_html=True)
-
-    st.write("")
-    # Accounts
-    with st.container():
-        # st.markdown("<div class='panel'>", unsafe_allow_html=True)
-        st.markdown("<div class='panel-header'>Accounts</div>", unsafe_allow_html=True)
-
-        for acc in accounts:
-            st.markdown(
-                f"""
-                <div class="account-card">
-                    <div class="account-name">{acc['name']}</div>
-                    <div class="account-balance-label">Current balance</div>
-                    <div class="account-balance">R${acc['balance']:.2f}</div>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
-
-        # st.markdown("</div>", unsafe_allow_html=True)
+#with right_col:
+#    # Expense chart
+#    with st.container():
+#        # st.markdown("<div class='panel'>", unsafe_allow_html=True)
+#        st.markdown("<div class='panel-header'>Expense chart</div>", unsafe_allow_html=True)
+#
+#        by_cat = expenses.groupby("Category", as_index=False)["Amount (R$)"].sum()
+#
+#        if not by_cat.empty:
+#            chart = (
+#                alt.Chart(by_cat)
+#                .mark_arc(innerRadius=60)
+#                .encode(
+#                    theta=alt.Theta("Amount (R$):Q", stack=True),
+#                    color=alt.Color("Category:N", legend=None),
+#                    tooltip=["Category", "Amount (R$)"],
+#                )
+#            )
+#            st.altair_chart(chart, use_container_width=True)
+#        else:
+#            st.write("No data")
+#
+#        # st.markdown("</div>", unsafe_allow_html=True)
+#
+#    st.write("")
+#    # Accounts
+#    with st.container():
+#        # st.markdown("<div class='panel'>", unsafe_allow_html=True)
+#        st.markdown("<div class='panel-header'>Accounts</div>", unsafe_allow_html=True)
+#
+#        for acc in accounts:
+#            st.markdown(
+#                f"""
+#                <div class="account-card">
+#                    <div class="account-name">{acc['name']}</div>
+#                    <div class="account-balance-label">Current balance</div>
+#                    <div class="account-balance">R${acc['balance']:.2f}</div>
+#                </div>
+#                """,
+#                unsafe_allow_html=True,
+#            )
+#
+#        # st.markdown("</div>", unsafe_allow_html=True)
+#
