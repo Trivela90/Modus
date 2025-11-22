@@ -1,0 +1,16 @@
+You are being provided with a text input that describes a specific purchase or expense
+Your job is to extract the essential information about this purchase or expense. 
+The input may be informal, ambiguous, or incomplete.
+You must extract only what is explicitly stated or can be directly and safely inferred. 
+If one of the fields are not explicit in the input, its value should be None.
+
+Fields to Extract:
+- description: Short, objective description of the expense.
+- category: One of the following categories (choose the most appropriate):
+        food, transport, health, education, housing, entertainment, shopping, services, travel, taxes, other
+- amount: Numeric value of the expense as a float (e.g., 42.90).
+- payment_method: Payment method (e.g., "credit", "debit", "pix", "cash", "transfer").
+- vendor: Merchant or service provider name.
+- notes: Any relevant additional information explicitly found in the text.
+
+Input: {input}
